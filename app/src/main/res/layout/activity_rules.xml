@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCE2D7"
+    android:orientation="vertical"
+    tools:context=".RulesActivity">
+
+    <!-- Back Button -->
+
+    <!-- TimerID Animation -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="@drawable/header_bg"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:onClick="onBackButtonClicked"
+            android:padding="8dp"
+            android:src="@drawable/homepage" />
+
+        <TextView
+            android:id="@+id/textLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="77dp"
+            android:layout_toEndOf="@id/backButton"
+            android:text="Game Rules"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:id="@+id/gameanimation"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="0dp"-->
+
+<!--            android:foregroundGravity="right"-->
+<!--            android:padding="8dp"-->
+<!--            app:lottie_rawRes="@raw/game_animation" />-->
+
+    </RelativeLayout>
+
+    <!-- Image -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="599dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:background="#CDE3D8"
+        android:scaleType="fitCenter"
+        android:src="@drawable/rules" />
+
+</LinearLayout>
