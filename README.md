@@ -1,2 +1,18 @@
 # CircleTap-Blitz
-CircleTap Challenge is an Android game developed in Java that challenges players to swiftly and accurately tap highlighted Views. Across multiple levels, each lasting 5 seconds, test your reflexes and precision as you progress. Attain high scores and secure a spot on the persistent score table if you're among the top 25 scorers!
+CircleTap Challenge is a simple yet engaging Android game that tests players' speed and precision. In this game, players are presented with a grid of View items, with one randomly highlighted at a time. The challenge is to swiftly tap the highlighted View before it changes.
+
+How to Play:
+Tap the highlighted View within the time limit to advance through levels.
+Aim for accuracy and speed to achieve high scores.
+
+
+Technologies Used:
+Android Studio
+Java/Kotlin
+SharedPreferences for persistent score storage
+
+
+Installation Instructions:
+Clone the repository.
+Open the project in Android Studio.
+Run the game on an Android device or emulator.
