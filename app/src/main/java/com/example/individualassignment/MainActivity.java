@@ -2,24 +2,12 @@ package com.example.individualassignment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import com.example.individualassignment.component.Player;
-
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,11 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 25; i++) {
             String name = "Player " + i;
-            int score = (int) (Math.random() * (13 - 5 + 1) + 5);
+            int score = (int) (Math.random() * (13 - 4) + 5);
             String playerKey = "@Player:" + name;
             editor.putInt(playerKey, score);
         }
-
         editor.apply();
 
     }

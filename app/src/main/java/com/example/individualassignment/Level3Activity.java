@@ -9,14 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
-import com.example.individualassignment.component.CircleView;
-import com.example.individualassignment.component.CircleView2;
 import com.example.individualassignment.component.CircleView3;
 
 import java.util.ArrayList;
@@ -88,7 +84,7 @@ public class Level3Activity extends AppCompatActivity {
             circleViews.add(circleView);
         }
 
-        CountDownTimer timer = new CountDownTimer(10000, 1000) {
+        CountDownTimer timer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 startButton.setEnabled(false); // Disable the start button once the game starts
@@ -153,13 +149,10 @@ public class Level3Activity extends AppCompatActivity {
         int score = Integer.parseInt(scoreText.getText().toString().split(" ")[1]);
         builder.setTitle("Congratulation");
         builder.setMessage("Score: " + (prefs.getInt(SCORE_KEY, 0) + score));
-        builder.setNegativeButton("Restart", (dialog, which) -> {
+        builder.setNegativeButton("End", (dialog, which) -> {
             dialog.dismiss();
-            removeScore();
-            setupGame();
-            scoreText.setText("Score: 0");
-            Intent intent = new Intent(this, Level1Activity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            saveScore(score);
+            Intent intent = new Intent(this, ResultActivity.class);
             startActivity(intent);
         });
         builder.setNeutralButton("Home", (dialog, which) -> {

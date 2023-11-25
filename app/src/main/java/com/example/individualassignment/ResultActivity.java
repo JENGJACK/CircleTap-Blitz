@@ -58,8 +58,15 @@ public class ResultActivity extends AppCompatActivity {
         });
 
         boolean isInTop25 = false;
-        if (players.size() < 25 || score >= players.get(Math.min(players.size(), 25) - 1).getScore()) {
-            isInTop25 = true;
+        if (players.size() < 25) {
+            isInTop25 = true; // If less than 25 players are in the leaderboard, the new score will be in the top 25
+        } else {
+            for (int i = 0; i < 25; i++) {
+                if (score >= players.get(i).getScore()) {
+                    isInTop25 = true;
+                    break;
+                }
+            }
         }
 
 

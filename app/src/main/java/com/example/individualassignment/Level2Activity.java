@@ -88,7 +88,7 @@ public class Level2Activity extends AppCompatActivity {
             circleViews.add(circleView);
         }
 
-        CountDownTimer timer = new CountDownTimer(10000, 1000) {
+        CountDownTimer timer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 startButton.setEnabled(false); // Disable the start button once the game starts
@@ -153,16 +153,10 @@ public class Level2Activity extends AppCompatActivity {
         int score = Integer.parseInt(scoreText.getText().toString().split(" ")[1]);
         builder.setTitle("Congratulation");
         builder.setMessage("Score: " + (prefs.getInt(SCORE_KEY, 0) + score));
-        builder.setNegativeButton("Restart", (dialog, which) -> {
+        builder.setNegativeButton("End", (dialog, which) -> {
             dialog.dismiss();
-            removeScore();
-            setupGame();
-            scoreText.setText("Score: 0");
-            // Navigate back to Level1Activity
-            Intent intent = new Intent(this, Level1Activity.class);
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
-
+            saveScore(score);
+            Intent intent = new Intent(this, ResultActivity.class);
             startActivity(intent);
         });
         builder.setNeutralButton("Home", (dialog, which) -> {

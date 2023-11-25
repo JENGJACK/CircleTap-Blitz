@@ -166,15 +166,14 @@ public class Level1Activity extends AppCompatActivity {
 
     private void showEndDialog(TextView scoreText) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        int score = Integer.parseInt(scoreText.getText().toString().split(" ")[1]);
         builder.setTitle("Congratulation");
         builder.setMessage(scoreText.getText().toString());
-        builder.setNegativeButton("Restart", (dialog, which) -> {
+        builder.setNegativeButton("End", (dialog, which) -> {
             dialog.dismiss();
-            removeScore();
-            setupGame();
-            startButton.setEnabled(true); // Enable the start button once finish
-            startButton.setBackgroundColor(Color.parseColor("#9C27B0"));
-            scoreText.setText("Score: 0");
+            saveScore(score);
+            Intent intent = new Intent(this, ResultActivity.class);
+            startActivity(intent);
         });
         builder.setNeutralButton("Home", (dialog, which) -> {
             dialog.dismiss();
@@ -186,7 +185,6 @@ public class Level1Activity extends AppCompatActivity {
         });
         builder.setPositiveButton("Next Level", (dialog, which) -> {
             dialog.dismiss();
-            int score = Integer.parseInt(scoreText.getText().toString().split(" ")[1]);
             saveScore(score);
             Intent intent = new Intent(this, Level2Activity.class);
             startActivity(intent);
