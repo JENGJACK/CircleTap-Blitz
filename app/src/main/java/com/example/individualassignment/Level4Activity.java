@@ -13,7 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
-import com.example.individualassignment.component.CircleView4;
+import com.example.individualassignment.component.DefaultCircleView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -54,16 +55,16 @@ public class Level4Activity extends AppCompatActivity {
     }
 
     private void setupGame() {
-        ArrayList<CircleView4> circleViews = new ArrayList<>();
+        ArrayList<DefaultCircleView> circleViews = new ArrayList<>();
         if (circleGrid.getChildCount() == 0) {
             for (int i = 0; i < 25; i++) {
-                CircleView4 circleView = new CircleView4(this, null);
+                DefaultCircleView circleView = new DefaultCircleView(this, null, 4); // Level 2
                 circleGrid.addView(circleView);
                 circleViews.add(circleView);
             }
         } else {
             for (int i = 0; i < circleGrid.getChildCount(); i++) {
-                CircleView4 circleView = (CircleView4) circleGrid.getChildAt(i);
+                DefaultCircleView circleView = (DefaultCircleView) circleGrid.getChildAt(i);
                 circleView.setColor(Color.GRAY);
                 circleViews.add(circleView);
             }
@@ -77,9 +78,9 @@ public class Level4Activity extends AppCompatActivity {
         scoreText.setText("Score: 0");
         animationView.setRepeatCount(LottieDrawable.INFINITE); // This will make the animation repeat indefinitely
         animationView.playAnimation();
-        ArrayList<CircleView4> circleViews = new ArrayList<>();
+        ArrayList<DefaultCircleView> circleViews = new ArrayList<>();
         for (int i = 0; i < circleGrid.getChildCount(); i++) {
-            CircleView4 circleView = (CircleView4) circleGrid.getChildAt(i);
+            DefaultCircleView circleView = (DefaultCircleView) circleGrid.getChildAt(i);
             circleView.setColor(Color.GRAY);
             circleViews.add(circleView);
         }
@@ -106,7 +107,7 @@ public class Level4Activity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CircleView4 circleView = (CircleView4) v;
+                DefaultCircleView circleView = (DefaultCircleView) v;
                 if (circleView.getColor() == Color.YELLOW) { // Check if the clicked circle is highlighted
                     circleView.setColor(Color.GREEN);
                     score[0]++;
@@ -125,10 +126,10 @@ public class Level4Activity extends AppCompatActivity {
         lightRandomCircle(circleViews, random, clickListener);
     }
 
-    private void lightRandomCircle(ArrayList<CircleView4> circleViews, Random random, View.OnClickListener clickListener) {
-        ArrayList<CircleView4> unlitCircles = new ArrayList<>();
+    private void lightRandomCircle(ArrayList<DefaultCircleView> circleViews, Random random, View.OnClickListener clickListener) {
+        ArrayList<DefaultCircleView> unlitCircles = new ArrayList<>();
 
-        for (CircleView4 circleView : circleViews) {
+        for (DefaultCircleView circleView : circleViews) {
             if (circleView.getColor() == Color.GRAY) {
                 unlitCircles.add(circleView);
             }
@@ -139,7 +140,7 @@ public class Level4Activity extends AppCompatActivity {
         }
 
         int index = random.nextInt(unlitCircles.size());
-        CircleView4 circleView = unlitCircles.get(index);
+        DefaultCircleView circleView = unlitCircles.get(index);
         circleView.setColor(Color.YELLOW);
         circleView.setOnClickListener(clickListener);
     }
@@ -149,15 +150,9 @@ public class Level4Activity extends AppCompatActivity {
         int score = Integer.parseInt(scoreText.getText().toString().split(" ")[1]);
         builder.setTitle("Congratulation");
         builder.setMessage("Score: " + (prefs.getInt(SCORE_KEY, 0) + score));
-        builder.setNegativeButton("End", (dialog, which) -> {
-            dialog.dismiss();
-            saveScore(score);
-            Intent intent = new Intent(this, ResultActivity.class);
-            startActivity(intent);
-        });
         builder.setPositiveButton("Leaderboard", (dialog, which) -> {
             dialog.dismiss();
-            saveScore(prefs.getInt(SCORE_KEY, 0) + score);
+            saveScore(score);
             Intent intent = new Intent(this, ResultActivity.class);
             startActivity(intent);
         });

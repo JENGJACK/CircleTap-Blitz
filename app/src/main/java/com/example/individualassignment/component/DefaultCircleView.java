@@ -12,13 +12,13 @@ public class DefaultCircleView extends View {
     private int color;
     private int desiredSize;
 
-    public DefaultCircleView(Context context, AttributeSet attrs) {
+    public DefaultCircleView(Context context, AttributeSet attrs, int activityLevel) {
         super(context, attrs);
         paint = new Paint();
         setColor(Color.LTGRAY); // Use Color.LTGRAY for a lighter gray shade
 
         // Set default desired size
-        desiredSize = 500;
+        setActivityLevel(activityLevel);
     }
 
     public void setColor(int color) {

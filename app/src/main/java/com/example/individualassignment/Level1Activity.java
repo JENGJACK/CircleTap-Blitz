@@ -8,8 +8,6 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
-import com.example.individualassignment.component.CircleView;
+import com.example.individualassignment.component.DefaultCircleView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,16 +59,16 @@ public class Level1Activity extends AppCompatActivity {
     private void setupGame() {
         removeScore();
 
-        ArrayList<CircleView> circleViews = new ArrayList<>();
+        ArrayList<DefaultCircleView> circleViews = new ArrayList<>();
         if (circleGrid.getChildCount() == 0) {
             for (int i = 0; i < 4; i++) {
-                CircleView circleView = new CircleView(this, null);
-                circleGrid.addView(circleView);
-                circleViews.add(circleView);
+                DefaultCircleView circleViewLevel1 = new DefaultCircleView(this, null, 1); // Level 1
+                circleGrid.addView(circleViewLevel1);
+                circleViews.add(circleViewLevel1);
             }
         } else {
             for (int i = 0; i < circleGrid.getChildCount(); i++) {
-                CircleView circleView = (CircleView) circleGrid.getChildAt(i);
+                DefaultCircleView circleView = (DefaultCircleView) circleGrid.getChildAt(i);
                 circleView.setColor(Color.LTGRAY);
                 circleViews.add(circleView);
             }
@@ -85,9 +83,9 @@ public class Level1Activity extends AppCompatActivity {
         animationView.setRepeatCount(LottieDrawable.INFINITE); // This will make the animation repeat indefinitely
         animationView.playAnimation();
 
-        ArrayList<CircleView> circleViews = new ArrayList<>();
+        ArrayList<DefaultCircleView> circleViews = new ArrayList<>();
         for (int i = 0; i < circleGrid.getChildCount(); i++) {
-            CircleView circleView = (CircleView) circleGrid.getChildAt(i);
+            DefaultCircleView circleView = (DefaultCircleView) circleGrid.getChildAt(i);
             circleView.setColor(Color.GRAY);
             circleViews.add(circleView);
         }
@@ -116,7 +114,7 @@ public class Level1Activity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CircleView circleView = (CircleView) v;
+                DefaultCircleView circleView = (DefaultCircleView) v;
                 if (circleView.getColor() == Color.YELLOW) { // Check if the clicked circle is highlighted
                     circleView.setColor(Color.GREEN);
                     score[0]++;
@@ -145,10 +143,10 @@ public class Level1Activity extends AppCompatActivity {
         finish();
     }
 
-    private void lightRandomCircle(ArrayList<CircleView> circleViews, Random random, View.OnClickListener clickListener) {
-        ArrayList<CircleView> unlitCircles = new ArrayList<>();
+    private void lightRandomCircle(ArrayList<DefaultCircleView> circleViews, Random random, View.OnClickListener clickListener) {
+        ArrayList<DefaultCircleView> unlitCircles = new ArrayList<>();
 
-        for (CircleView circleView : circleViews) {
+        for (DefaultCircleView circleView : circleViews) {
             if (circleView.getColor() == Color.GRAY) {
                 unlitCircles.add(circleView);
             }
@@ -159,7 +157,7 @@ public class Level1Activity extends AppCompatActivity {
         }
 
         int index = random.nextInt(unlitCircles.size());
-        CircleView circleView = unlitCircles.get(index);
+        DefaultCircleView circleView = unlitCircles.get(index);
         circleView.setColor(Color.YELLOW);
         circleView.setOnClickListener(clickListener);
     }
@@ -184,6 +182,7 @@ public class Level1Activity extends AppCompatActivity {
             scoreText.setText("Score: 0");
         });
         builder.setPositiveButton("Next Level", (dialog, which) -> {
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#CCCCCC"));
             dialog.dismiss();
             saveScore(score);
             Intent intent = new Intent(this, Level2Activity.class);
